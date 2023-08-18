@@ -1,0 +1,207 @@
+%%%%%%%%%%%%%%%%%%%%
+% 風格參數
+%%%%%%%%%%%%%%%%%%%%
+\NeedsTeXFormat{LaTeX2e}[1994/06/01]
+\usepackage{geometry}
+\geometry{verbose,a4paper,tmargin=2.3cm,bmargin=3.5cm,lmargin=3cm,rmargin=2.5cm}
+
+\newcommand{\zhKaiFont}{\CJKfamily{bkai}} % 設定中文楷體字型
+\newcommand{\zhMingFont}{\CJKfamily{bsmi}} % 設定中文明體字型
+
+\newcommand{\mybaselinestretch}{2}  % 行距 1.5 倍 + 20%, (約為 double space
+\renewcommand{\baselinestretch}{\mybaselinestretch}  % 論文行距預設值
+
+\newcommand{\mysinglespacing}{\renewcommand{\baselinestretch}{1.18}}
+\newcommand{\myonehalfspacing}{\renewcommand{\baselinestretch}{1.5}}
+\newcommand{\mydoublespacing}{\renewcommand{\baselinestretch}{2}}
+
+%%%%%%%%%%%%%%%%%%%%
+% TOC頁設定
+%%%%%%%%%%%%%%%%%%%%
+
+% 目錄頁設定
+\newcommand{\NckuTOC}
+{
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\nameToc}
+    \tableofcontents{\nameToc}
+    \titlecontents{chapter}
+    [0em]
+    {}
+    {第\CJKnumber{\thecontentslabel}章~~}
+    {}{\titlerule*{.}\contentspage}
+}
+
+% 表目錄頁設定
+\newcommand{\NckuLOT}
+{
+    \newpage
+    \newcommand{\lotlabel}{表} \renewcommand{\numberline}[1]{\lotlabel~##1\hspace*{1em}}
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\nameLot}
+    \listoftables{\nameLot}
+}
+
+% 圖目錄頁設定
+\newcommand{\NckuLOF}
+{
+    \newpage
+    \newcommand{\loflabel}{圖}
+    \renewcommand{\numberline}[1]{\loflabel~##1\hspace*{1em}}
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\nameTof}
+    \listoffigures{\nameTof}
+}
+
+%%%%%%%%%%%%%%%%%%%%
+% 封面頁設定
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\NckuCoverPage}
+{
+\begin{titlepage}
+    \begin{center}
+        \vspace{2cm}
+        \zhKaiFont
+        \centering
+        {
+            \fontsize{24}{16}\selectfont
+            \bfseries
+            \zhUniv \\
+            \zhDepartmentName \\
+            {碩士論文}\\
+        }
+        \vspace{2em}
+        \vfill
+        {
+            \par
+            {\fontsize{22}{16}\selectfont\bfseries \zhTitle \\}
+            \vspace{0.5cm}
+            {\fontsize{16}{16}\selectfont\bfseries \enTitle \\}
+            \vfill
+            {
+                \fontsize{18}{14}\selectfont
+                研 究 生\hspace{2pt}：\authorZhName{} \hspace{2em} \\
+                指導教授：\advisorZhNameA \hspace{3pt}\\
+                \hspace{2em} \hspace{1pt}
+            }
+            \vfill
+            \vfill
+            \fontsize{24pt}{20pt}\selectfont	
+            {中華民國\rocYear 年\zhMonth 月}
+        }
+        \par
+    \end{center}
+\end{titlepage}
+}
+
+%%%%%%%%%%%%%%%%%%%%
+% 致謝頁設定
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\NckuAcknPage}
+{
+    \newpage
+    \phantomsection
+    \begin{center}
+        \LARGE \zhKaiFont \bfseries \nameAckn
+    \end{center}
+    \addcontentsline{toc}{chapter}{\nameAckn}
+    \vspace{12pt}\par
+    \CJKindent
+    \input{contents/ackn}
+}
+
+%%%%%%%%%%%%%%%%%%%%
+% 英文摘要 summary
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\NckuEnAbstractSummary}
+{
+\renewcommand{\baselinestretch}{1}
+\begin{center}
+\fbox{
+    \parbox[c]{0.97\textwidth}{
+        \begin{center}
+        \normalsize{\bf SUMMARY}\\
+        \end{center}
+        \normalsize{
+            \input{contents/enAbstract/1-summary}
+            \begin{flushleft}
+            \mbox{{\bf Keywords}: \input{contents/enAbstract/1-keywords}}\\
+            \mbox{\input{contents/enAbstract/1-keywords2}}
+            \end{flushleft}
+        }
+    }
+}
+\end{center}   
+}
+
+%%%%%%%%%%%%%%%%%%%%
+% 英文摘要 contents: introduction, method, result, conclusion
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\NckuEnAbstractContents}[2]
+{
+    \begin{center}
+        \textbf{#1}
+    \end{center}
+    #2
+}
+
+%%%%%%%%%%%%%%%%%%%%
+% 英文摘要頁設定
+%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 以下節錄自《國立成功大學各系(所)博碩士撰寫畢業論文須知補充說明》
+% 本案配合98學年度第1學期教務會議決議
+% 未來博士論文3至5年內達成全面化以英文撰寫;10年內達成碩士論文全面化以英文撰寫。  
+% 本案為階段性規定，在達成碩博士畢業論文全面英文化之前，
+% 以中文撰寫者，須另加附800至1200字之英文延伸摘要。
+% 此延伸摘要取代原規定之一頁英文摘要。
+% 2021/07/27 新增英文延伸摘要格式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\NckuEnAbstractPage}
+{
+    \newpage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\nameEabstract}
+    \begin{center}
+        \renewcommand{\baselinestretch}{1.3}
+        \normalsize{\bf \enTitle}\\
+        \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+        \makebox[5cm][c]{\normalsize{\authorEnName}}\\
+        \makebox[5cm][c]{\normalsize{\advisorEnNameA}}\\  % 教授A英文姓名
+        % \makebox[5cm][c]{\normalsize{\advisorEnNameB}}\\  % 教授B英文姓名
+        \normalsize{\enDepartmentName, \enCollegeName}\\
+        \normalsize{\enUniv}\\
+    \end{center}
+    \renewcommand{\baselinestretch}{\mybaselinestretch}
+    \normalsize
+
+    \NckuEnAbstractSummary
+    \newpage
+    \NckuEnAbstractContents{INTRODUCTION}
+        {\input{contents/enAbstract/2-introduction}}
+    \NckuEnAbstractContents{MATERIALS AND METHODS}
+        {\input{contents/enAbstract/3-method}}
+    \NckuEnAbstractContents{RESULTS AND DISCUSSION}
+        {\input{contents/enAbstract/4-result}}
+    \NckuEnAbstractContents{CONCLUSION}
+        {\input{contents/enAbstract/5-conclusion}}
+    
+    \renewcommand{\baselinestretch}{\mybaselinestretch} 
+}
+
+%%%%%%%%%%%%%%%%%%%%
+% 中文摘要頁設定
+%%%%%%%%%%%%%%%%%%%%
+\newcommand{\NckuZhAbstractPage}
+{
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\nameCabstract}
+    \begin{center}
+        \makebox[2.7cm][c]{\fontseries{bx}\selectfont\Large{摘要}}
+    \end{center}
+    \renewcommand{\baselinestretch}{\mybaselinestretch}
+    \normalsize
+    \par
+    \input{contents/zhAbstract}
+}

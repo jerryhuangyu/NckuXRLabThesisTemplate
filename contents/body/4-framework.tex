@@ -1,0 +1,71 @@
+\allowdisplaybreaks[4]
+
+第四章內容
+
+\section{研究架構}
+
+傳統自動導引車和自主移動機器人之間的差異如表 \ref{tab:compare-agv-amr} 所示，自動導引車不適用於工程現地主要原因為營建工程缺乏固定的生產線結構，機器人必須具有自由移動和具自適應性的能力。table 可以使用 latex table generator 產生，不必自己打!可參考這個 https://www.tablesgenerator.com/
+
+\begin{table}[H]
+    \centering
+    \caption{AGV 和 AMR 間的差異比較}
+    \label{tab:compare-agv-amr}
+    \begin{tabular}{lll}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+    項目\hspace{1.5cm} & Automated Guided Vehicle & Autonomous Mobile Robot \\ \hline
+    導航方式 & 固定路線 & 自主導航 \\
+    預置設施 & 需要安裝 & 無需安裝 \\
+    適用場景 & 固定環境 & 動態環境 \\ \hline
+    任務性質 & 專注單一 & 多樣靈活 \\
+    任務適應性 & 缺乏調整彈性 & 具可擴展性 \\
+    導入速度 & 較長佈署時間 & 快速導入 \\ \hline
+    \end{tabular}
+\end{table}
+
+URDF 文件以 XML 格式編寫，提供一種結構化的方式來定義機器人的各種組件。以下是本研究在創建自主移動平台的虛擬分身使用的重點 XML 標記及其用途：
+
+\begin{itemize}
+    \item <robot> 標籤：所有機器人組件必須在標籤內定義。
+    \item <link> 標籤：每個標籤定義特定鏈接的視覺表示、碰撞屬性和慣性屬性。
+    \item <joint> 標籤：原點（位置和方向）以及旋轉或平移軸，詳細類型見表 \ref{tab:urdf}。
+    \item <collision> 標籤：在標籤內可以定義碰撞幾何並指定原點和摩擦係數等屬性。
+    \item <inertial> 標籤：該標籤允許指定鏈接的質量、慣性矩和質心偏移。
+    \item <visual> 標籤：材料（顏色和紋理）和原點（位置和方向）等屬性。
+    \item <limit> 標籤：透過標籤規定關節運動的限制，可以定義限制屬性。
+\end{itemize}
+
+\begin{table}[H]
+    \centering
+    \caption{URDF 模型中的 joint 類型}
+    \label{tab:urdf}
+    \begin{tabular}{ll}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+    關節類型    & 描述                                          \\ \hline
+    Continuous & 旋轉關節，繞軸承旋轉沒有旋轉上下限限制。            \\
+    Revolute   & 旋轉關節，與 Continuous 相似，但有旋轉之限制範圍   \\
+    Prismatic  & 滑動關節，沿軸向滑動，具有指定的限定範圍。          \\ \hline
+    Planar     & 平移關節，允許在垂直於軸向的平面內進行移動。         \\
+    Floating   & 自由關節，允許所有軸向上的運動（6個自由度）。        \\
+    Fixed      & 固定關節，不能移動，所有自由度都被鎖定。            \\ \hline
+    \end{tabular}
+\end{table}
+
+\section{人工智慧訓練資料蒐集流程}
+
+資料是人工智慧模型的基礎，而高品質和多樣性的資料是訓練出準確、可靠模型的關鍵。然而在營建產業相關的數據資料集相當稀缺，主要受到數據保密性、資料碎片化、數據收集成本等因素，詳見表 \ref{tab:datamissing}。
+
+\begin{table}[H]
+    \centering
+    \caption{營建產業資料集稀缺因素}
+    \label{tab:datamissing}
+    \begin{tabular}{ll}
+    \hline
+    \rowcolor[HTML]{C0C0C0} 
+    因素     & 描述       \\ \hline
+    數據保密性  & \begin{tabular}[c]{@{}l@{}}在建築營造領域，一些數據可能受到法律或商業機密的保護，\\ 例如高科技廠房，限制了數據的公開和分享，導致部分重要數\\ 據無法公開使用及獲取。\end{tabular} \\ \hline
+    資料碎片化 & \begin{tabular}[c]{@{}l@{}}建築營建領域涉及多個相關腳色，包括業主、建築師、工程師\\ 、承包商、供應商等。相關方之間的數據通常以不同的格式和\\ 結構保存，並存儲在不同的系統和文件中。這導致數據碎片化\\ 使得整合和標準化變得困難。\end{tabular} \\ \hline
+    數據收集成本 & \begin{tabular}[c]{@{}l@{}}在建築營建領域數據的收集需要耗費大量的時間、資源和成本\\ 。例如進行現場測量、監測和數據記錄需要人力和設備投入\\ ，限制了數據蒐集的規模和可用性。\end{tabular} \\ \hline
+    \end{tabular}
+\end{table}

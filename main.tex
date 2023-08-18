@@ -1,0 +1,127 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 論文風格
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[hyperref,UTF8,12pt,a4paper]{ncku-style/ncku_class}
+\usepackage{ncku-style/style}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 論文參數
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{thesis-param/Date}
+\usepackage{thesis-param/DepartmentInfomation}
+\usepackage{thesis-param/TableOfContent}
+\usepackage{thesis-param/Title}
+\usepackage{thesis-param/Writer}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 套件引用
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{fancyhdr}  % 借用此套件來擺放浮水印，產生 header, footer
+\pagestyle{fancy} % 啟動 fancy header/footer 套件
+\fancyhead{}  % reset left, central, right header to empty
+\fancyfoot[C]{\thepage} % 中間 footer 擺放頁碼
+\renewcommand{\headrulewidth}{0pt} % header 的直線; 0pt 則無線
+\usepackage{CJKutf8}  % macro for Chinese/Japanese/Korean processing
+\usepackage{CJKnumb}  % for Chinese numbering capability
+\usepackage{type1cm}
+\usepackage{indentfirst}
+\usepackage[pdftex]{graphicx}
+\newcommand\myworkflow{pdftex}  % set the flag
+\usepackage{hyperref}
+\hypersetup{unicode,colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black}
+\usepackage{graphicx} \graphicspath{{images/}}
+\usepackage{psfrag} % text replacement in figure
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{float}
+\floatstyle{plaintop}
+\restylefloat{table}
+\usepackage[T1]{fontenc} 
+\usepackage{newtxmath,newtxtext}
+\usepackage{titletoc} % handling toc/lof/lot entries
+\usepackage[]{titlesec} % 分段命令提供自定義選項(將chapter1修改爲第1章)
+\usepackage[usenames,dvipsnames,table]{xcolor}
+\usepackage{url} % 引用網址 \url{http://www.yzu.edu.tw}
+\usepackage{ragged2e} % 增強版文本對齊選項
+\usepackage{caption} % 自定義圖形和表格標題
+\captionsetup[figure]{labelsep=space, justification=centering, singlelinecheck=false}
+\captionsetup[table]{labelsep=space, justification=centering, singlelinecheck=false}
+\usepackage{subcaption} % 自定義圖形和表格子標題
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 文件設定
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\begin{CJK}{UTF8}{bkai} % 預設中文字型、編碼、標楷體
+\CJKindent  % (global CJK setting)段首內縮兩格
+% 針對 latex + dvipdfmx 工作流程在 hyperref 套件的影響下，圖檔的辨識力退化
+% 所作的權宜措施。可能是因為 TeXLive2007 hyperref 裏的
+% 客製 graphicx / dvipdfmx 的設定檔不夠新
+\ifx\myworkflow\mydvipdfmxflow
+	\DeclareGraphicsExtensions{.pdf,.png,.jpg,.eps}
+	\DeclareGraphicsRule{.pdf}{eps}{.bb}{}
+	\DeclareGraphicsRule{.png}{eps}{.bb}{}
+	\DeclareGraphicsRule{.jpg}{eps}{.bb}{}
+\fi
+\renewcommand\prechaptername{第} % 出現在每一章的開頭的「第 x 章」
+\renewcommand\postchaptername{章}
+\newcommand{\tablename}{表} % 在文章中 table 會以「表 x」表示
+\newcommand{\figurename}{圖} % 在文章中 figure 會以「圖 x」表示
+\newcommand{\boldtext}{\fontseries{bx}\selectfont}
+\newcommand{\Ssd}[1]{(#1)\hspace{0.8em}}
+\renewcommand{\thesection}{\arabic{chapter}.\arabic{section}}
+\renewcommand{\thesubsection}{\arabic{chapter}.\arabic{section}.\arabic{subsection}}
+\titleformat{\chapter}{\centering\Large\bfseries\boldtext}{第\,\CJKnumber{\thechapter}\,章}{1em}{}
+\titlespacing{\chapter}{0pt}{-20pt}{10pt}
+\titleformat{\section}{\RaggedRight\large\bfseries\boldtext}{\,\thesection\,}{1em}{}
+\titleformat{\subsection}{\RaggedRight\large\bfseries\boldtext}{\,\thesubsection\,}{1em}{}
+\titleformat{\subsubsection}{\RaggedRight\bfseries\boldtext}{}{1em}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 論文內容 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 1. 封面頁
+\NckuCoverPage
+
+% 2. 口委中英文簽名單
+% 手動利用 ilovepdf 網站合併至 PDF
+
+% Roman 頁碼起始
+\newpage
+\setcounter{page}{1}
+\pagenumbering{Roman}
+
+% 3. 中英文摘要
+\NckuZhAbstractPage
+\NckuEnAbstractPage
+
+% 4. 誌謝
+\NckuAcknPage
+
+% 5. 目錄
+\NckuTOC
+
+% 6. 表目錄
+\NckuLOT
+
+% 7. 圖目錄
+\NckuLOF
+
+% arabic 頁碼起始
+\newpage
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+% 8. Contents
+\input{contents/body/main}
+
+% 9. 參考文獻
+% 手動利用 ilovepdf 網站合併至 PDF (注意頁碼)
+
+\clearpage % to make sure all CJK characters are processed
+\end{CJK}
+\end{document}
