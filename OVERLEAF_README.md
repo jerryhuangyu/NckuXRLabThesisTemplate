@@ -5,6 +5,6 @@
 ## 使用步驟
 
 1. Click "New Project/Upload Project"<br /><img src='./images/md/click.png' alt='click' style="width:250px">
-1. Upload .zip file you [download](https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/jerryhuangyu/NckuXRLabThesisTemplate/tree/main) from this repo<br /><img src='./images/md/zip.png' alt='click' style="width:300px">
+1. Upload .zip file you <a href="https://minhaskamal.github.io/DownGit/#/home?url=https://github.com/jerryhuangyu/NckuXRLabThesisTemplate/" target="_blank">download</a> from this repo<br /><img src='./images/md/zip.png' alt='click' style="width:300px">
 1. Start working on thesis-param, contents folders
 1. Compile and download PDF
