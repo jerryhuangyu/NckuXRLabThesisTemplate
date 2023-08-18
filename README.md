@@ -11,7 +11,7 @@
 以下是使用本模板的一些基本步驟：
 
 1. 下載本模板。
-2. 上傳至 https://overleaf.com。([說明](./OVERLEAF_README.md))
+2. 上傳至 https://overleaf.com。 ([說明](./OVERLEAF_README.md))
 3. thesis-param 資料夾: 撰寫論文基本資料、目錄名稱。
 4. contents 資料夾: 撰寫論文內容
 5. images 資料夾: 論文使用圖檔放置處
